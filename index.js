@@ -38,7 +38,7 @@ $(".btn").on("click", function(){
 
 function playSound(id) {
     var audio = new Audio('sounds/' + id + '.mp3');
-    audio.volume = 0.01;
+    audio.volume = 0.05;
     audio.play();
 }
 
