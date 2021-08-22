@@ -53,7 +53,7 @@ function animatePress(id) {
 function gameOver(){
     enableBtn = false
     playSound('wrong') 
-    $('#level-title').html('GAME OVER. LEVELS COMPLETED: ' + (level-1) + ".<br> Press A to Start Again!")
+    $('#level-title').html('GAME OVER. LEVELS COMPLETED: ' + (level-1) + ".<br> Press SPACE to Start Again!")
     $('body').addClass('game-over')
     setTimeout(function(){
         $('body').removeClass('game-over')
@@ -63,7 +63,7 @@ function gameOver(){
 }
 
 $(document).keypress(function(e){
-    if (e.key == 'a' && level == 0){
+    if (e.keyCode == 32 && level == 0){ // e.keyCode == 32 -> Pressing SpaceBar
         $('#level-title').removeClass('multi-line')
         enableBtn = true
         nextSequence()
