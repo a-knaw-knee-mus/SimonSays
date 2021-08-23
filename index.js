@@ -3,14 +3,14 @@ var soundColours = ["red.mp3", "blue.mp3", "green.mp3", "yellow.mp3", "wrong.mp3
 var gamePattern = [];
 var userClickedPattern = [];
 var level = 0;
-var step = 0
-var enableBtn = false
+var step = 0;
+var enableBtn = false;
 
 function nextSequence(){  
-    level++
-    step = 0
-    $('#level-title').text('Level ' + level)
-    enableBtn = false
+    level++;
+    step = 0;
+    $('#level-title').text('Level ' + level);
+    enableBtn = false;
 
     setTimeout(function(){
         userClickedPattern = []
@@ -20,19 +20,19 @@ function nextSequence(){
         gamePattern.push(randomChosenColour);
         animatePress(gamePattern[gamePattern.length-1]);
         playSound(gamePattern[gamePattern.length-1]);
-        enableBtn = true
+        enableBtn = true;
     }, 1000)
 }
 
 $(".btn").on("click", function(){
     if (enableBtn){
-        userClickedPattern.push(this.id)
-        userClickedPattern[userClickedPattern.length-1] != gamePattern[userClickedPattern.length-1] ? gameOver() : playSound(this.id)
-        step++
+        userClickedPattern.push(this.id);
+        userClickedPattern[userClickedPattern.length-1] != gamePattern[userClickedPattern.length-1] ? gameOver() : playSound(this.id);
+        step++;
         if (step==level){
-            nextSequence()
+            nextSequence();
         }
-        animatePress(this.id)
+        animatePress(this.id);
     }
 })
 
@@ -44,29 +44,29 @@ function playSound(id) {
 
 function animatePress(id) {
     $("#" + id).fadeOut(100).fadeIn(100);
-    $('#' + id).addClass('pressed')
+    $('#' + id).addClass('pressed');
     setTimeout(function(){
-        $('#' + id).removeClass('pressed')
+        $('#' + id).removeClass('pressed');
     }, 100)
 }
 
 function gameOver(){
-    enableBtn = false
-    playSound('wrong') 
-    $('#level-title').html('GAME OVER. LEVELS COMPLETED: ' + (level-1) + ".<br> Press SPACE to Start Again!")
-    $('body').addClass('game-over')
+    enableBtn = false;
+    playSound('wrong') ;
+    $('#level-title').html('GAME OVER. LEVELS COMPLETED: ' + (level-1) + ".<br> Press SPACE to Start Again!");
+    $('body').addClass('game-over');
     setTimeout(function(){
-        $('body').removeClass('game-over')
+        $('body').removeClass('game-over');
     }, 100)
-    level = 0
-    $('#level-title').addClass('multi-line')
+    level = 0;
+    $('#level-title').addClass('multi-line');
 }
 
 $(document).keypress(function(e){
-    if (e.keyCode == 32 && level == 0){ // e.keyCode == 32 -> Pressing SpaceBar
-        $('#level-title').removeClass('multi-line')
-        enableBtn = true
-        nextSequence()
-        gamePattern = []
+    if (e.keyCode == 32 && level == 0){ //e.keyCode == 32 -> pressing SpaceBar
+        $('#level-title').removeClass('multi-line');
+        enableBtn = true;
+        nextSequence();
+        gamePattern = [];
     }
 })
